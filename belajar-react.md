@@ -303,4 +303,73 @@ Untuk membuat Thunk sederhana step by stepnya:
 
 untuk penjelasan yang lebih detailnya bisa klik [ini](https://github.com/reduxjs/redux-thunk)
 
+## React Context
 
+React context bukanlah termasuk state management. Berbeda dengan redux yaitu awalnya membuat store terlebih dahulu. Jika di react context yaitu membuat component context. Sama halnya dengan redux penggunaan react context guna menghindari case props drilling. Sekarang saya akan mempraktekan pembuatannya:
+
+- Terlebih dahulu membuat components yang dibutuhkan
+
+![membuatComponents](/images/Screenshot%202022-11-13%20134243.png)
+
+Components yang digunakan masih sama dengan components yang dibuat saat materi redux. Di bagian yang berhubungan dengan redux saja dihapus.
+
+- Selanjutnya membuat file Keranjang Count providernya.
+
+![membuatFileprovider](/images/Screenshot%202022-11-13%20134321.png)
+
+Terlihat pada gambar pada pembuatan context, tidak jauh beda ketika kita membuat store pada materi redux. React content ini tidak ada install tambahan, melainkan memanfaatkan libyrary bawaan react. Hingga hasil akhirnya menjadi seperti ini:
+
+![hasilAkhirdiFileProvider](/images/Screenshot%202022-11-13%20192227.png)
+
+Penambahan props "children" ini bertujuan untuk menangkap file App untuk digunakan. Susunannya: components akan ditampung seperti biasa pada file App.jsx, lalu file App akan dijadikan props sekaligus ditampung pada file KeranjangCountProvider.jsx, kemudian file provider tersebut ditampung di file main.jsx. Untuk value yang berisi state keranjangCount merupakan perwujudan fungsi dari react context yaitu ingin mengglobalkan state untuk diatur perubahannya pada file lain.
+
+- Kemudian membuat perubahan di file main.jsx
+
+![membuatPerubahandiMain](/images/Screenshot%202022-11-13%20192417.png)
+
+Nah, React components juga memiliki kekurangan. Seperti yang terlihat pada gambar diatas, dimana apabila terdapat file provider baru maka ia akan terus menjadi pembungkus dari provider yang lain. Kasus tersebut dinamakan "React Context Hell"
+
+- Setelah itu pada file App kita tampilkan componetsnya.
+
+- Terakhir kita akan membuat data contextnya ditampilkan pada components Counter.jsx, menggunakan state yang telah kita globalkan pada file provider.
+
+![membuatLogicdiFileCounter](/images/Screenshot%202022-11-13%20192603.png)
+
+Selanjutnya kita akan menggunakan useReducer.
+
+![membuatPerubahandiFileProvider](/images/Screenshot%202022-11-13%20223743.png)
+
+![Perubahanlagi](/images/Screenshot%202022-11-13%20223824.png)
+
+![membuatPerubahandiFileCounter](/images/Screenshot%202022-11-13%20224051.png)
+
+## React Testing
+
+Testing ialah proses yang memastikan suatu program berjalan sesuai dengan yang harapkan baik itu perfitur dan workflownya. Sebelumnya kita juga sudah melakukan testing dengan menggunakan console.log guna mengetahui sebuah program berjalan dengan baim atau tidak. Cara kita mengecek sendiri testingan aplikasi, kita telah melakukan salah satu jenis testing yaitu Manual testing. Lawan dari Manual testing ialah automation testing yaitu kita akan membuat terlebih dahulu code programnnya lalu dari code tersebutlah yang akan melakukan testing. Sekarang kita akan mempelajari lebih lanjut mengenai Automation Test terbagi menjadi 3 macam:
+
+1. Unit test yaitu melakukan pengujian pada bagian terkecil sebuah program. Semisal sebuah function, yah kita akan melakukan pengecekan function tersebut berjalan atau tidaknya.
+2. Integration yaitu melakukan pengujian ketika aplikasi yang dibuat saling terhubung ke aplikasi yang lain. Semisal aplikasi kita terhubung dengan namanya aplikasi lain sebuah database.
+3. End to End yaitu pengujian yang dilakukan dari sisi user.
+
+Terdapat 2 cara menulis testing:
+
+1. Membuat Fitur lalu membuat testing
+2. Membuat testing terlebih dahulu lau membuat fiturnya. cara ini disebut dengan TDD circle life. Yaitu disaat membuat testingnya maka akan masuk ke fase red zone: Test Fails, Selanjutnya ketika code telah dibuat dan sesuai dengan ekspektasi yang diinginkan maka akan masuk ke fase green zone: Test Passes, Setelah itu masuk ke fase Refactor yaitu proses pembaharuan ke yang lebih baik.
+
+Saya akan mempraktekan testing sederhana yaitu unit testing menggunakan npm jest:
+
+- Membuat ekpektasi dari kasus unit yang akan dilakukan proses testing 
+
+![membuatEkspectasiTesting](/images/Screenshot%202022-11-14%20095540.png)
+
+- Selanjutnya membuat eksekusi codenya
+
+![membuatEksekusiCode](/images/Screenshot%202022-11-14%20100200.png)
+
+- Kemudian membuat sedikit perubahan di file package.json guna agar bisa running di terminal.
+
+![membuatPerubahandiPackage](/images/Screenshot%202022-11-14%20100231.png)
+
+- Terakhir yaitu proses running dari testingan yang otelah dibuat.
+
+![hasilTestingan](/images/Screenshot%202022-11-14%20100329.png)
